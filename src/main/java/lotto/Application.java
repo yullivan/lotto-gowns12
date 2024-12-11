@@ -11,10 +11,10 @@ public class Application {
         int nonAutoCount = Input.nonAutoCount(purchasePrice);
 
         //로또 번호 선택
-        LottoNumbersList lottoNumbersList = new LottoNumbersList(true, purchasePrice / 1000 - nonAutoCount);
+        LottoNumbersList lottoNumbersList = new LottoNumbersList(true, purchasePrice, nonAutoCount);
         if (nonAutoCount > 0) {
             System.out.println("수동으로 구매할 번호를 입력해주세요.");
-            lottoNumbersList = lottoNumbersList.mergeLottoNumbersList(new LottoNumbersList(false, nonAutoCount));
+            lottoNumbersList = lottoNumbersList.mergeLottoNumbersList(new LottoNumbersList(false, purchasePrice, nonAutoCount));
         }
         System.out.println("수동으로 " + nonAutoCount + "장, 자동으로 " + (purchasePrice / 1000 - nonAutoCount) + "개를 구매했습니다.");
 

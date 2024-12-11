@@ -40,7 +40,7 @@ public class ApplicationTests {
     @Test
     void numbersList() {
 
-        Assertions.assertThat(new LottoNumbersList(true,2).getLottoNumbersList().size()).isEqualTo(2);
+        Assertions.assertThat(new LottoNumbersList(true,2,2).getLottoNumbersList().size()).isEqualTo(2);
     }
 }
 

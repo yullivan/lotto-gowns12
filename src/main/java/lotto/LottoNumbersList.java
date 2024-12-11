@@ -5,21 +5,12 @@ public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
 
     //자동 수동 여부와 개수에 맞춰 로또번호 리스트 생성
-    public LottoNumbersList(boolean auto, int count) {
-        ArrayList<LottoNumbers> temp = new ArrayList<>();
+    public LottoNumbersList(boolean auto, int purchasePrice, int nonAutoCount) {
+        int count = purchasePrice/1000-nonAutoCount;
         if (auto) {
-            for (int i = 0; i < count; i++) {
-                temp.add(new LottoNumbers(auto));
-            }
-            this.lottoNumbersList = temp;
+            this.lottoNumbersList = NumberCreate.autoNumberCreate(count);;
         } else {
-            for (int i = 0; i < count; i++) {
-                temp.add(new LottoNumbers(auto));
-                if (i < count - 1) {
-                    System.out.println("다음 번호를 입력하세요.");
-                }
-            }
-            this.lottoNumbersList = temp;
+            this.lottoNumbersList = NumberCreate.nonAutoNumberCreate(nonAutoCount);
         }
     }
 
