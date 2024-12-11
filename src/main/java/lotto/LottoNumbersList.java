@@ -1,16 +1,18 @@
 package lotto;
 
 import java.util.*;
+
 public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
 
     //자동 수동 여부와 개수에 맞춰 로또번호 리스트 생성
     public LottoNumbersList(boolean auto, int purchasePrice, int nonAutoCount) {
-        int count = purchasePrice/1000-nonAutoCount;
+        int count = purchasePrice / 1000 - nonAutoCount;
         if (auto) {
-            this.lottoNumbersList = NumberCreate.autoNumberCreate(count);;
+            this.lottoNumbersList = NumberCreate.autoNumbersCreate(count);
+
         } else {
-            this.lottoNumbersList = NumberCreate.nonAutoNumberCreate(nonAutoCount);
+            this.lottoNumbersList = NumberCreate.nonAutoNumbersCreate(nonAutoCount);
         }
     }
 
@@ -19,25 +21,27 @@ public class LottoNumbersList {
         this.lottoNumbersList = lottoNumbersList;
     }
 
+
+    public List<LottoNumbers> getLottoNumbersList() {
+            return lottoNumbersList;
+        }
+
     //로또 리스트끼리 병합
+
     public LottoNumbersList mergeLottoNumbersList(LottoNumbersList other) {
-        ArrayList<LottoNumbers> temp = new ArrayList<>(lottoNumbersList);
+        List<LottoNumbers> temp = new ArrayList<>(lottoNumbersList);
         temp.addAll(other.getLottoNumbersList());
         return new LottoNumbersList(temp);
     }
 
-    public List<LottoNumbers> getLottoNumbersList() {
-        return lottoNumbersList;
-    }
-
     //로또번호끼리 비교
-    public List<Rank> rankList(LottoNumbers winningList,int bonusNumber){
+    public List<Rank> rankList(LottoNumbers winningList, int bonusNumber) {
         ArrayList<Rank> rankList = new ArrayList<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            List<Integer> temp = lottoNumbers.lottoNumberList();
-            temp.retainAll(winningList.lottoNumberList());
-            boolean matchBonus = lottoNumbers.lottoNumberList().contains(bonusNumber);
+            List<Integer> temp = lottoNumbers.getToIntegerList();
+            temp.retainAll(winningList.getToIntegerList());
+            boolean matchBonus = lottoNumbers.getToIntegerList().contains(bonusNumber);
             rankList.add(Rank.valueOf(temp.size(), matchBonus));
         }
 

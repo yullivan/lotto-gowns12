@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,14 +8,7 @@ public class Output {
     //선택된 로또 번호 출력
     public static void choosePrint(LottoNumbersList lottoNumbersList) {
         for (LottoNumbers lottoNumbers : lottoNumbersList.getLottoNumbersList()) {
-            int n1 = lottoNumbers.getFirst_lottoNumber().getNumber();
-            int n2 = lottoNumbers.getSecond_lottoNumber().getNumber();
-            int n3 = lottoNumbers.getThird_lottoNumber().getNumber();
-            int n4 = lottoNumbers.getFourth_lottoNumber().getNumber();
-            int n5 = lottoNumbers.getFifth_lottoNumber().getNumber();
-            int n6 = lottoNumbers.getSixth_lottoNumber().getNumber();
-            ArrayList<Integer> temp = new ArrayList<>(List.of(n1, n2, n3, n4, n5, n6));
-            System.out.println(temp);
+            System.out.println(lottoNumbers.getToIntegerList());
         }
     }
 
