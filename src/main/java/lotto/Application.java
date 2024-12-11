@@ -19,7 +19,7 @@ public class Application {
 
 
         //로또 번호 자동선택
-        Util.lottoNumber(purchasePrice, nonAutoCount, lottoNumbersList);
+        Util.autoLottoNumber(purchasePrice, nonAutoCount, lottoNumbersList);
         Util.choosePrint(lottoNumbersList);
         System.out.println("보너스 번호를 입력해주세요.");
         int bonusNumber = Util.bonusNumberInput();
@@ -27,7 +27,7 @@ public class Application {
 
         //지난주 당첨번호 입력
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        LottoNumbers winningList = Util.winningList();
+        LottoNumbers winningList = Util.winningNumbers();
 
 
         //당첨 통계

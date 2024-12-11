@@ -67,7 +67,7 @@ public class Util {
         return lottoNumbersList;
     }
 
-    public static void lottoNumber(int purchasePrice, int nonAutoCount, List<LottoNumbers> lottoNumbersList) {
+    public static void autoLottoNumber(int purchasePrice, int nonAutoCount, List<LottoNumbers> lottoNumbersList) {
         List<Integer> numberList = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toCollection(ArrayList::new));
 
         int count = purchasePrice / 1000 - nonAutoCount;
@@ -86,7 +86,7 @@ public class Util {
         }
     }
 
-    public static LottoNumbers winningList() {
+    public static LottoNumbers winningNumbers() {
         Scanner scanner = new Scanner(System.in);
         List<Integer> temp = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -95,6 +95,8 @@ public class Util {
 
         return new LottoNumbers(temp);
     }
+
+
 
     public static int bonusNumberInput() {
         Scanner scanner = new Scanner(System.in);
