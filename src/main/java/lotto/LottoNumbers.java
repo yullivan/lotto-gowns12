@@ -47,6 +47,16 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public int matchCount(LottoNumbers winningList){
+        List<Integer> temp = this.getToIntegerList();
+        temp.retainAll(winningList.getToIntegerList());
+        return temp.size();
+    }
+
+    public boolean matchBonus(int bonusNumber){
+        return this.getToIntegerList().contains(bonusNumber);
+    }
+
     public List<Integer> getToIntegerList(){
         List<Integer> integers = new ArrayList<>(List.of());
         for (LottoNumber lottoNumber : lottoNumbers) {

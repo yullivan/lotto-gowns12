@@ -37,12 +37,8 @@ public class LottoNumbersList {
     //로또번호끼리 비교
     public List<Rank> rankList(LottoNumbers winningList, int bonusNumber) {
         ArrayList<Rank> rankList = new ArrayList<>();
-
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            List<Integer> temp = lottoNumbers.getToIntegerList();
-            temp.retainAll(winningList.getToIntegerList());
-            boolean matchBonus = lottoNumbers.getToIntegerList().contains(bonusNumber);
-            rankList.add(Rank.valueOf(temp.size(), matchBonus));
+            rankList.add(Rank.valueOf(lottoNumbers.matchCount(winningList), lottoNumbers.matchBonus(bonusNumber)));
         }
 
         return rankList;
