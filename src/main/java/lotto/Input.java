@@ -1,55 +1,59 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Input {
-
-    //구매금액 입력
-    public static int purchasePrice() {
+    public static PurchasePrice purchasePrice(){
         Scanner sc = new Scanner(System.in);
-        int purchasePrice = 0;
-        while (true) {
+        PurchasePrice purchasePrice;
+        while (true){
             try {
-                purchasePrice = sc.nextInt();
-                if (purchasePrice % 1000 != 0 || purchasePrice < 1000) {
-                    throw new IllegalArgumentException("금액이 정확하지 않습니다.");
-                }
+                purchasePrice = new PurchasePrice(sc.nextInt());
                 break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("금액이 정확하지 않습니다. 다시 입력하세요");
+            }catch (IllegalArgumentException e){
+                System.out.println("금액은 천원단위로 입력 가능합니다.");
             }
         }
         return purchasePrice;
     }
 
-    //수동 로또 개수 입력
-    public static int nonAutoCount(int purchasePrice) {
+    public static Count purchaseCount(PurchasePrice purchasePrice){
         Scanner sc = new Scanner(System.in);
-        int nonAutoCount = -1;
-        while (nonAutoCount == -1) {
+        Count purchaseCount;
+        while (true){
             try {
-                nonAutoCount = sc.nextInt();
-                if (nonAutoCount > purchasePrice / 1000) {
-                    System.out.println("구매금액보다 많이 선택하셨습니다.");
-                    throw new IllegalArgumentException("구매금액보다 많이 선택하셨습니다.");
-                }
-                if (nonAutoCount < 0) {
-                    System.out.println("잘못된 숫자를 입력하셨습니다.");
-                    throw new IllegalArgumentException("잘못된 숫자 입력");
-                }
-            } catch (IllegalArgumentException e) {
-                nonAutoCount = -1;
+                purchaseCount = new Count(purchasePrice,sc.nextInt());
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("횟수가 0회 미만입니다");
             }
         }
-        return nonAutoCount;
+        return purchaseCount;
     }
 
-    //보너스번호 입력
-    public static int bonusNumberInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+    public static LottoNumbers non_autoLottoNumberInput(){
+        Scanner sc = new Scanner(System.in);
+        LottoNumbers non_autoLottoNumberInput;
+
+        while(true){
+            try {
+                non_autoLottoNumberInput = new LottoNumbers(sc.nextLine());
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("입력 형식을 지켜주세요.[번호1,번호2,번호3,번호4,번호5,번호6]");
+            }
+        }
+
+        return non_autoLottoNumberInput;
     }
 
+    public static LottoNumbers winningLottoNumbersInput() {
+        Scanner sc = new Scanner(System.in);
+        return Input.non_autoLottoNumberInput();
+    }
+
+    public static LottoNumber bonusLottoNumberInput() {
+        Scanner sc = new Scanner(System.in);
+        return new LottoNumber(sc.nextInt());
+    }
 }

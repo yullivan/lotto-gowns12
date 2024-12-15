@@ -1,47 +1,44 @@
 package lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
-
-    //자동 수동 여부와 개수에 맞춰 로또번호 리스트 생성
-    public LottoNumbersList(boolean auto, int purchasePrice, int nonAutoCount) {
-        int count = purchasePrice / 1000 - nonAutoCount;
-        if (auto) {
-            this.lottoNumbersList = NumberCreate.autoNumbersCreate(count);
-
-        } else {
-            this.lottoNumbersList = NumberCreate.nonAutoNumbersCreate(nonAutoCount);
-        }
-    }
-
 
     public LottoNumbersList(List<LottoNumbers> lottoNumbersList) {
         this.lottoNumbersList = lottoNumbersList;
     }
 
+    public LottoNumbersList(boolean auto, Count count) {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
 
-    public List<LottoNumbers> getLottoNumbersList() {
-            return lottoNumbersList;
+        if (auto) {
+            for (int i = 0; i < count.getAutoCount(); i++) {
+                lottoNumbersList.add(new LottoNumbers());
+            }
+        } else {
+            for (int i = 0; i < count.getNon_autoCount(); i++) {
+                lottoNumbersList.add(Input.non_autoLottoNumberInput());
+            }
         }
 
-    //로또 리스트끼리 병합
-
-    public LottoNumbersList mergeLottoNumbersList(LottoNumbersList other) {
-        List<LottoNumbers> temp = new ArrayList<>(lottoNumbersList);
-        temp.addAll(other.getLottoNumbersList());
-        return new LottoNumbersList(temp);
+        this.lottoNumbersList = lottoNumbersList;
     }
 
-    //로또번호끼리 비교
-    public List<Rank> rankList(LottoNumbers winningList, int bonusNumber) {
-        ArrayList<Rank> rankList = new ArrayList<>();
+    public List<LottoNumbers> getLottoNumbersList() {
+        return lottoNumbersList;
+    }
+
+    public List<Rank> rankList(LottoNumbers WinningLottoNumbers, LottoNumber BonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
+
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            rankList.add(Rank.valueOf(lottoNumbers.matchCount(winningList), lottoNumbers.matchBonus(bonusNumber)));
+            ranks.add(lottoNumbers.matchCount(WinningLottoNumbers,BonusNumber));
         }
 
-        return rankList;
+        return ranks;
     }
 
     @Override
