@@ -11,21 +11,24 @@ public class LottoNumbersList {
         this.lottoNumbersList = lottoNumbersList;
     }
 
-    public LottoNumbersList(boolean auto, Count count) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    public LottoNumbersList(Count count) {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>(List.of());
 
-        if (auto) {
-            for (int i = 0; i < count.getAutoCount(); i++) {
-                lottoNumbersList.add(new LottoNumbers());
-            }
-        } else {
-            for (int i = 0; i < count.getNon_autoCount(); i++) {
-                lottoNumbersList.add(Input.non_autoLottoNumberInput());
-            }
+        for (int i = 0; i < count.getNon_autoCount(); i++) {
+            lottoNumbersList.add(Input.non_autoLottoNumberInput());
+        }
+
+        for (int i = 0; i < count.getAutoCount(); i++) {
+            lottoNumbersList.add(new LottoNumbers());
+        }
+
+        if (lottoNumbersList.isEmpty()){
+            throw new IllegalArgumentException("[ERROR] 로또번호가 한개도 선택되지 않았습니다.");
         }
 
         this.lottoNumbersList = lottoNumbersList;
     }
+
 
     public List<LottoNumbers> getLottoNumbersList() {
         return lottoNumbersList;
@@ -35,7 +38,7 @@ public class LottoNumbersList {
         List<Rank> ranks = new ArrayList<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            ranks.add(lottoNumbers.matchCount(WinningLottoNumbers,BonusNumber));
+            ranks.add(lottoNumbers.matchCount(WinningLottoNumbers, BonusNumber));
         }
 
         return ranks;

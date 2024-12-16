@@ -13,11 +13,11 @@ public class Application {
         System.out.println();
 
         Output.non_autoLottoNumbersListRequest();
-        LottoNumbersList lottoNumbersList = new LottoNumbersList(false,purchaseCount);
+        LottoNumbersList lottoNumbersList = new LottoNumbersList(purchaseCount);
         System.out.println();
 
         Output.purchaseCountOutput(purchaseCount);
-        Output.LottoNumbersListOutput(lottoNumbersList,purchaseCount);
+        Output.LottoNumbersListOutput(lottoNumbersList);
         System.out.println();
 
         Output.winningLottoNumbersRequest();
@@ -25,6 +25,6 @@ public class Application {
         Output.bonusLottoNumberRequest();
         LottoNumber bonusLottoNumber = Input.bonusLottoNumberInput();
 
-        Output.result(lottoNumbersList.rankList(winningLottoNumbers,bonusLottoNumber),purchasePrice);
+        Output.result(lottoNumbersList.rankList(winningLottoNumbers, bonusLottoNumber), purchasePrice);
     }
 }
